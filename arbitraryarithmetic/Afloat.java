@@ -4,6 +4,9 @@ public class Afloat {
     String val; 
     boolean isNegative;
 
+    public Afloat(){
+        this.val = "0";
+    }
     public Afloat(String input) {
         if (input.startsWith("-")) {
             isNegative = true;
@@ -15,6 +18,14 @@ public class Afloat {
         normalize();
     }
 
+    public void copy(Afloat num){
+        this.val = num.val;
+        this.isNegative = num.isNegative;
+    }
+
+    public static Afloat parse(String s){
+        return new Afloat(s);
+    }
     private void normalize() {
         int i = 0;
         while(val.endsWith(" ")){
