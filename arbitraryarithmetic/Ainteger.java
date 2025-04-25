@@ -44,7 +44,7 @@ public class Ainteger {
         }
         if (start == val.length()) {
             val = "0";
-            isNegative = false; // Avoid negative zero
+            isNegative = false; 
         } else {
             val = val.substring(start);
         }

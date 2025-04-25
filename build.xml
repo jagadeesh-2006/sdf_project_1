@@ -1,0 +1,19 @@
+<project name="AArithmetic" basedir="." default="jar">
+    <target name="compile">
+        <mkdir dir="out"/>
+        <javac srcdir="." destdir="out" includeantruntime="false"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="arithmetic.jar" basedir="out"/>
+    </target>
+
+    <target name="run" depends="jar">
+        <java jar="arithmetic.jar" fork="true" classname="MyInfArith">
+            <arg value="${arg0}"/>
+            <arg value="${arg1}"/>
+            <arg value="${arg2}"/>
+            <arg value="${arg3}"/>
+        </java>
+    </target>
+</project>
