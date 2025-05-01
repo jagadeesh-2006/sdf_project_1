@@ -1,19 +1,19 @@
 
 import subprocess
 import sys
-import os
+# import os
 
 def build_and_run(args):
     # Create output directory if it doesn't exist
-    os.makedirs("out", exist_ok=True)
+    # os.makedirs("out", exist_ok=True)
 
-    # Compile Java files to 'out'
-    subprocess.run([
-        "javac", "-d", "out",
-        "arbitraryarithmetic/Afloat.java",
-        "arbitraryarithmetic/Ainteger.java",
-        "MyInfArith.java"
-    ], check=True)
+    # # Compile Java files to 'out'
+    # subprocess.run([
+    #     "javac", "-d", "out",
+    #     "arbitraryarithmetic/Afloat.java",
+    #     "arbitraryarithmetic/Ainteger.java",
+    #     "MyInfArith.java"
+    # ], check=True)
 
     # Run the main class with classpath set to 'out'
     subprocess.run(["java", "-cp", "out", "MyInfArith"] + args)

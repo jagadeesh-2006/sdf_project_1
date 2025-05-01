@@ -9,7 +9,7 @@
     </target>
 
     <target name="run" depends="jar">
-        <java jar="arithmetic.jar" fork="true" classname="MyInfArith">
+        <java classname="MyInfArith" classpath="arithmetic.jar" fork="true">
             <arg value="${arg0}"/>
             <arg value="${arg1}"/>
             <arg value="${arg2}"/>
