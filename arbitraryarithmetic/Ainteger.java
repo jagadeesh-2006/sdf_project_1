@@ -1,3 +1,4 @@
+//  this class defines the addition , subtraction , mulitiplication and Division for Big integers 
 package arbitraryarithmetic;
 public class Ainteger {
     String val;
@@ -26,16 +27,7 @@ public class Ainteger {
         return new Ainteger(s);
     }
 
-    // private void normalize() {
-    //    for(int i=0;i<val.length();i++){
-    //     if(val.charAt(i) !='0'){
-    //         val = val.substring(i);
-    //         break;
-    //     }
-    //    }
-    //    if (val.isEmpty() || val.equals("0")) {
-    //     val = "0";  // Normalize to "0" if the result is empty or just zeros
-    // }
+    // this removes the leading zeroes in the val
     private void normalize() {
         int start = 0;
         // Strip leading zeros
@@ -50,9 +42,7 @@ public class Ainteger {
         }
     }
     
-
-    
-
+    // comparing two Big Integers (if equal -> 0 , this.val > other.val -> 1 , this.val < other.val -> -1)
     public int compareTo(Ainteger other) {
         this.normalize();
         other.normalize();
@@ -79,34 +69,41 @@ public class Ainteger {
         return 0;
     }
 
+    // this is for absolute subtraction of two Big Integers
     private static Ainteger abssub(Ainteger a, Ainteger b) {
-        // Assumes a >= b and both are positive
+        // Assumes: a >= b and both are positive numbers (absolute subtraction)
+    
         StringBuilder result = new StringBuilder();
-        String s1 = a.val;
-        String s2 = b.val;
-
+        String s1 = a.val;  
+        String s2 = b.val;  
+    
+        // Pad s2 with leading zeros to match the length of s1
         while (s2.length() < s1.length()) {
             s2 = "0" + s2;
         }
-
+    
         int borrow = 0;
+    
+        // Start subtracting from the last digit (right to left)
         for (int i = s1.length() - 1; i >= 0; i--) {
-            int d1 = s1.charAt(i) - '0';
-            int d2 = s2.charAt(i) - '0' + borrow;
-
+            int d1 = s1.charAt(i) - '0';        
+            int d2 = s2.charAt(i) - '0' + borrow; 
+    
             if (d1 < d2) {
                 d1 += 10;
                 borrow = 1;
             } else {
                 borrow = 0;
             }
-
-            result.append(d1 - d2);
+    
+            result.append(d1 - d2);  // Subtract and store the result
         }
-
+    
+        // Reverse the result string because we appended digits in reverse order
         return new Ainteger(result.reverse().toString());
     }
-
+    
+    // for subtraction of two Big Integers
     public Ainteger sub(Ainteger other) {
         Ainteger result;
 
@@ -137,6 +134,7 @@ public class Ainteger {
         return result;
     }
 
+    // for addition of two Big Integers
     public Ainteger add(Ainteger other) {
         // Handle opposite signs via subion
         if (this.isNegative != other.isNegative) {
@@ -177,46 +175,58 @@ public class Ainteger {
     public String toString() {
         return (isNegative ? "-" : "") + val;
     }
-    public Ainteger mul(Ainteger other){
-       String num1 = this.val;
-       String num2 = other.val;
-       int len1 = num1.length();
-       int len2 = num2.length();
-   
 
+    // for mutliplication of two Big Integers
+    public Ainteger mul(Ainteger other) {
+        String num1 = this.val;
+        String num2 = other.val;
+        int len1 = num1.length();
+        int len2 = num2.length();
+    
+        // Initialize result to zero
         Ainteger result = new Ainteger("0"); 
-
+    
         for (int i = len1 - 1; i >= 0; i--) {
-            int carry = 0;
-            StringBuilder partial = new StringBuilder();
+            int carry = 0; // Carry for the current digit multiplication
+            StringBuilder partial = new StringBuilder(); // Holds the intermediate partial product
     
             int d1 = num1.charAt(i) - '0';
     
+            // Add trailing zeros corresponding to the position of the digit in num1
             for (int k = 0; k < len1 - 1 - i; k++) {
                 partial.append('0');
             }
     
+            // Multiply the current digit of num1 with all digits of num2
             for (int j = len2 - 1; j >= 0; j--) {
-                int d2 = num2.charAt(j) - '0';
-                int mul = d1 * d2 + carry;
-                partial.append(mul % 10);
-                carry = mul / 10;
+                int d2 = num2.charAt(j) - '0'; 
+                int mul = d1 * d2 + carry; // Multiply digits and add carry
+                partial.append(mul % 10); 
+                carry = mul / 10; // Update carry
             }
     
+            // If there's any remaining carry, append it
             if (carry > 0) {
                 partial.append(carry);
             }
     
+            // Reverse the partial result as we built it backwards
             partial.reverse();
+    
+            // Convert partial result string to Ainteger and add it to result
             Ainteger partialResult = new Ainteger(partial.toString());
-            result = result.add(partialResult); 
+            result = result.add(partialResult); // Accumulate the result
         }
+    
+        // Set the sign of the result: negative if operands have opposite signs
+        // and the result is not zero
         result.isNegative = (this.isNegative != other.isNegative) && !result.val.equals("0");
-
+    
         return result;
     }
-
     
+
+    // for divison for two Big Integers
     public Ainteger div(Ainteger other) {
         if (other.val.equals("0")) {
             throw new ArithmeticException("Division by zero");
@@ -235,7 +245,7 @@ public class Ainteger {
         StringBuilder quotient = new StringBuilder();
         Ainteger remainder = new Ainteger("0");
     
-        // Step through each digit of the dividend
+        // go through each digit of the dividend
         for (int i = 0; i < dividend.val.length(); i++) {
             // Bring down the next digit and adjust remainder
             remainder = remainder.mul(new Ainteger("10"));
@@ -256,15 +266,15 @@ public class Ainteger {
         }
     
         // Remove leading zeros if any
-        String resultVal = quotient.toString().replaceFirst("^0+(?!$)", "");
+        String resultVal = quotient.toString();
     
+        Ainteger result = new Ainteger(resultVal);
         // If the result is empty (i.e., quotient is 0), set it to "0"
         if (resultVal.isEmpty()) {
             resultVal = "0";
         }
     
         // Create the result and apply the correct sign
-        Ainteger result = new Ainteger(resultVal);
         result.isNegative = isNegativeResult;
     
         return result;

@@ -4,7 +4,7 @@ import arbitraryarithmetic.Ainteger;
 public class MyInfArith {
     public static void main(String[] args) {
         if (args.length != 4) {
-            System.out.println("Usage: java MyInfArith <int/float> <add/sub/mul/div> <operand1> <operand2>");
+            System.out.println("arguments are less please check your arguments");
             return;
         }
 
@@ -21,10 +21,14 @@ public class MyInfArith {
                     Ainteger intResult = null;
 
                     switch (operation.toLowerCase()) {
-                        case "add": intResult = int1.add(int2); break;
-                        case "sub": intResult = int1.sub(int2); break;
-                        case "mul": intResult = int1.mul(int2); break;
-                        case "div": intResult = int1.div(int2); break;
+                        case "add": intResult = int1.add(int2);
+                            break;
+                        case "sub": intResult = int1.sub(int2); 
+                            break;
+                        case "mul": intResult = int1.mul(int2); 
+                            break;
+                        case "div": intResult = int1.div(int2); 
+                            break;
                         default: System.out.println("Invalid operation: " + operation); return;
                     }
 
@@ -37,10 +41,14 @@ public class MyInfArith {
                     Afloat floatResult = null;
 
                     switch (operation.toLowerCase()) {
-                        case "add": floatResult = float1.add(float2); break;
-                        case "sub": floatResult = float1.sub(float2); break;
-                        case "mul": floatResult = float1.mul(float2); break;
-                        case "div": floatResult = float1.div(float2); break;
+                        case "add": floatResult = float1.add(float2);
+                            break;
+                        case "sub": floatResult = float1.sub(float2);
+                            break;
+                        case "mul": floatResult = float1.mul(float2); 
+                            break;
+                        case "div": floatResult = float1.div(float2); 
+                            break;
                         default: System.out.println("Invalid operation: " + operation); return;
                     }
 
@@ -52,7 +60,7 @@ public class MyInfArith {
             }
         } catch (Exception e) {
             System.err.println("Error during calculation: " + e.getMessage());
-            e.printStackTrace();
+          
         }
     }
 }

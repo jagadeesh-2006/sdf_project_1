@@ -2,18 +2,16 @@ import subprocess
 import sys
 
 def build_and_run(args):
-    # Compile Java files
-    subprocess.run(["javac", "-d", "out", "arbitraryarithmetic/*.java", "MyInfArith.java"], check=True)
-
-    # Create JAR file
+    # Compile Java files into 'out' directory
     subprocess.run([
-        "jar", "cf", "arithmetic.jar",
-        "-C", "out", "arbitraryarithmetic",
-        "-C", "out", "MyInfArith.class"
+        "javac", "-d", "out",
+        "arbitraryarithmetic/Afloat.java",
+        "arbitraryarithmetic/Ainteger.java",
+        "MyInfArith.java"
     ], check=True)
 
-    # Run the main class
-    subprocess.run(["java", "-cp", "arithmetic.jar", "MyInfArith"] + args)
+    # Run the main class using classpath 'out'
+    subprocess.run(["java", "-cp", "out", "MyInfArith"] + args)
 
 if __name__ == "__main__":
     if len(sys.argv) < 5:
