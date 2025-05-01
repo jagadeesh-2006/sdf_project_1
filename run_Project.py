@@ -1,8 +1,34 @@
+# import subprocess
+# import sys
+
+# def build_and_run(args):
+#     # Compile Java files
+#     subprocess.run(["javac", "-d", "out", "arbitraryarithmetic/Afloat.java","arbitraryarithmetic/Ainteger.java", "MyInfArith.java"], check=True)
+
+#     # Create JAR file
+#     subprocess.run([
+#         "jar", "cf", "arithmetic.jar",
+#         "-C", "out", "arbitraryarithmetic",
+#         "-C", "out", "MyInfArith.class"
+#     ], check=True)
+
+#     # Run the main class
+#     subprocess.run(["java", "-cp", "arithmetic.jar", "MyInfArith"] + args)
+
+# if __name__ == "__main__":
+#     if len(sys.argv) < 5:
+#         print("Usage: python run_project.py <int/float> <add/sub/mul/div> <operand1> <operand2>")
+#     else:
+#         build_and_run(sys.argv[1:])
 import subprocess
 import sys
+import os
 
 def build_and_run(args):
-    # Compile Java files into 'out' directory
+    # Create output directory if it doesn't exist
+    os.makedirs("out", exist_ok=True)
+
+    # Compile Java files to 'out'
     subprocess.run([
         "javac", "-d", "out",
         "arbitraryarithmetic/Afloat.java",
@@ -10,7 +36,7 @@ def build_and_run(args):
         "MyInfArith.java"
     ], check=True)
 
-    # Run the main class using classpath 'out'
+    # Run the main class with classpath set to 'out'
     subprocess.run(["java", "-cp", "out", "MyInfArith"] + args)
 
 if __name__ == "__main__":
@@ -18,3 +44,4 @@ if __name__ == "__main__":
         print("Usage: python run_project.py <int/float> <add/sub/mul/div> <operand1> <operand2>")
     else:
         build_and_run(sys.argv[1:])
+
