@@ -8,6 +8,10 @@
         <jar destfile="arithmetic.jar" basedir="out"/>
     </target>
 
+    <target name="clean">
+        <delete dir="out/"/>
+    </target>
+    
     <target name="run" depends="jar">
         <java classname="MyInfArith" classpath="arithmetic.jar" fork="true">
             <arg value="${arg0}"/>
