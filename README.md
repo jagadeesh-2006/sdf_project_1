@@ -1,22 +1,22 @@
 # ArbitraryArithmetic
 
-## 📌 Overview
+##  Overview
 
 **ArbitraryArithmetic** is a Java-based library and command-line tool designed to handle **infinite precision** arithmetic for both integers and floating-point numbers.  
 This project implements custom arithmetic logic using strings, overcoming limitations of Java's built-in numeric types.
 
 ---
 
-## 🚀 Features
+##  Features
 
 - Infinite-precision arithmetic operations:
-  - ✅ Integer support: `Ainteger.java`
-  - ✅ Floating-point support: `Afloat.java`
+  -  Integer support: `Ainteger.java`
+  -  Floating-point support: `Afloat.java`
 - Basic operations:
-  - ➕ Addition
-  - ➖ Subtraction
-  - ✖️ Multiplication
-  - ➗ Division
+  -  Addition
+  -  Subtraction
+  -  Multiplication
+  -  Division
 - CLI Interface via `MyInfArith.java`
 - Example programs: `example.java`, `MainExample.java`
 - Python helper script for build & run: `run_Project.py`
@@ -25,7 +25,7 @@ This project implements custom arithmetic logic using strings, overcoming limita
 
 ---
 
-## 🛠️ Project Structure
+##  Project Structure
 
 .
 ├── arbitraryarithmetic/
@@ -44,7 +44,7 @@ This project implements custom arithmetic logic using strings, overcoming limita
 
 ---
 
-## 🔧 Build & Run
+##  Build & Run
 
 ### Option 1: Apache Ant
 
