@@ -27,6 +27,7 @@ This project implements custom arithmetic logic using strings, overcoming limita
 
 ##  Project Structure
 
+'''
 .
 ├── arbitraryarithmetic/
 │ ├── Afloat.java # Floating-point arithmetic implementation
@@ -38,7 +39,7 @@ This project implements custom arithmetic logic using strings, overcoming limita
 ├── MyInfArith.java # Main CLI interface
 └── run_Project.py # Python helper script for build/run
 
-
+'''
 
 
 
